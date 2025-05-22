@@ -1,0 +1,5 @@
+npm create vite@latest proyecto -> (vanilla y javascript)
+cd proyecto ->(ingresar a la carpeta del proyecto)
+npm install -> instala paquetes
+npm run dev ->ejecutar el proyecto
+control + c ->para detener la ejecucion
