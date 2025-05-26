@@ -1,4 +1,8 @@
 // src/componentes/original.js
+import { db } from '../firebase-config.js';
+import { collection, addDoc } from 'firebase/firestore';
+// ...existing code...
+
 export const original = () => {
   const section = document.createElement('section');
   section.innerHTML = `
@@ -20,19 +24,24 @@ export const original = () => {
     }
 
     try {
-      const res = await fetch('https://randomuser.me/api/ ');
-      
+      const res = await fetch('https://randomuser.me/api/');
       if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
-
       const data = await res.json();
-
-      // Extraemos un nombre aleatorio de la respuesta
       const randomName = data.results[0].name.first;
+      const nombreCombinado = `${n1}${n2} ${randomName}`;
 
-      resultado.textContent = `Nombre combinado: ${n1}${n2} ${randomName}`;
+      resultado.textContent = `Nombre combinado: ${nombreCombinado}`;
+
+      // Guardar en Firestore
+      await addDoc(collection(db, 'nombresCombinados'), {
+        nombre1: n1,
+        nombre2: n2,
+        nombreCombinado,
+        fecha: new Date()
+      });
     } catch (error) {
-      console.error('Error al llamar a la API:', error);
-      resultado.textContent = 'Hubo un problema al conectar con la API.';
+      console.error('Error al llamar a la API o guardar en Firestore:', error);
+      resultado.textContent = 'Hubo un problema al conectar con la API o guardar el nombre.';
     }
   });
 
