@@ -1,5 +1,5 @@
 // src/componentes/logout.js
-import { auth, signOut } from '../../firebase-config.js';
+import { auth, signInWithEmailAndPassword } from '../firebase-config.js';
 
 export const logout = () => {
   const section = document.createElement('section');

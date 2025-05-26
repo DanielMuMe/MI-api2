@@ -1,5 +1,5 @@
 // src/componentes/registro.js
-import { auth, createUserWithEmailAndPassword } from '../../firebase-config.js';
+import { auth, signInWithEmailAndPassword } from '../firebase-config.js';
 
 export const registro = () => {
   const section = document.createElement('section');

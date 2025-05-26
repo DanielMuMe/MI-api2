@@ -1,5 +1,5 @@
 // src/componentes/perfil.js
-import { auth } from '../../firebase-config.js';
+import { auth, signInWithEmailAndPassword } from '../firebase-config.js';
 
 export const perfil = () => {
   const section = document.createElement('section');

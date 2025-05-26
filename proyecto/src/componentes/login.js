@@ -1,5 +1,5 @@
 // src/componentes/login.js
-import { auth, signInWithEmailAndPassword } from '../../firebase-config.js';
+import { auth, signInWithEmailAndPassword } from '../firebase-config.js';
 
 export const login = () => {
   const section = document.createElement('section');
