@@ -12,22 +12,27 @@ export const original = () => {
   section.querySelector('#generar').addEventListener('click', async () => {
     const n1 = section.querySelector('#nombre1').value.trim();
     const n2 = section.querySelector('#nombre2').value.trim();
+    const resultado = section.querySelector('#resultado');
 
     if (!n1 || !n2) {
-      section.querySelector('#resultado').textContent = 'Por favor ingresa ambos nombres.';
+      resultado.textContent = 'Por favor ingresa ambos nombres.';
       return;
     }
 
     try {
-      const res = await fetch('https://randomapi.com/api/6n5d5z?key=KEY_DE_RANDOMAPI ');
+      const res = await fetch('https://randomuser.me/api/ ');
+      
+      if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
+
       const data = await res.json();
 
+      // Extraemos un nombre aleatorio de la respuesta
       const randomName = data.results[0].name.first;
-      const combinado = `${n1}${n2} ${randomName}`;
-      section.querySelector('#resultado').textContent = 'Nombre combinado: ' + combinado;
+
+      resultado.textContent = `Nombre combinado: ${n1}${n2} ${randomName}`;
     } catch (error) {
       console.error('Error al llamar a la API:', error);
-      section.querySelector('#resultado').textContent = 'Hubo un error al obtener datos.';
+      resultado.textContent = 'Hubo un problema al conectar con la API.';
     }
   });
 
